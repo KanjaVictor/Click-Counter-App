@@ -1,5 +1,7 @@
 //Importing React and React's Component class so that we can create our own component.
 import React, { Component } from 'react';
+import Highscore from './Highscore';
+import './css/style.css'
 
 class Application extends Component {
 
@@ -23,6 +25,14 @@ class Application extends Component {
             this.setState({ overTen: true })
         }
     }
+
+    resetCount = (e) => {
+        console.log("Event is", e);
+        this.setState({
+            count: 0,
+            overTen: false
+        });
+    }
     //2.
     render() {
         //3.
@@ -31,10 +41,10 @@ class Application extends Component {
         return (
             <div>
                 <h1>You clicked the button, {count} times</h1>
-                {(this.state.overTen) ?
-                    <h3>Best high score of 10</h3>
-                    :null
-                }
+                <Highscore
+                    overTen={this.state.overTen}
+                    onReset={this.resetCount}
+                />
 
                 <span>
                     <button onClick={(() => this.handleClick())}>Click Me</button>
